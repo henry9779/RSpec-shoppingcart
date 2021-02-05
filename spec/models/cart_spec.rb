@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Cart, type: :model do
   describe '購物車基本功能' do
-    it '可將商品放入購物車，購物車內有東西'
+    it '可將商品放入購物車，購物車內有東西' do
+      cart = Cart.new
+      cart.add_item 1
+      expect(cart.nil?).to be false
+    end
     it '如果加入同商品進購物車，購買項目 (CartItem) 不會增加，但數量會增加'
     it '商品可放入購物車，也可再拿出來'
     it '每個購買項目 (CartItem) 可以計算自己的金額 (小計)'
