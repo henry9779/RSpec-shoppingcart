@@ -17,7 +17,18 @@ RSpec.describe Cart, type: :model do
       expect(cart.items.first.quantity).to be 3
       expect(cart.items.second.quantity).to be 2
     end
-    it '商品可放入購物車，也可再拿出來'
+    it '商品可放入購物車，也可再拿出來' do
+      cart = Cart.new
+      p1 = Product.create(title:'Ruby')
+      p2 = Product.create(title:'Rails')
+
+      2.times { cart.add_item(p1.id) }
+      5.times { cart.add_item(p2.id) }
+
+      expect(cart.items.first.product_id).to be p1.id
+      expect(cart.items.second.product_id).to be p2.id
+      expect(cart.items.first.product).to be_a Product
+    end
     it '每個購買項目 (CartItem) 可以計算自己的金額 (小計)'
     it '可以計算整台購物車的總金額'
   end
