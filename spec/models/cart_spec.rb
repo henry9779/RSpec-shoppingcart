@@ -29,7 +29,7 @@ RSpec.describe Cart, type: :model do
       expect(cart.items.second.product_id).to be p2.id
       expect(cart.items.first.product).to be_a Product
     end
-    it '每個購買項目 (CartItem) 可以計算自己的金額 (小計)'
+
     it '可以計算整台購物車的總金額'
   end
 
