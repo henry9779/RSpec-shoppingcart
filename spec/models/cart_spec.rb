@@ -49,7 +49,25 @@ RSpec.describe Cart, type: :model do
   end
 
   describe '購物車進階功能' do
-    it '可將購物車內容轉換成 Hash，存到 Session 內'
+
+    it '可將購物車內容轉換成 Hash，存到 Session 內' do
+      cart = Cart.new
+
+      3.times { cart.add_item(1) }
+      4.times { cart.add_item(2) }
+
+      expect(cart.serialize).to eq session_hash
+    end
     it '可將 Session 的內容 (Hash格式)，還原回購物車的內容'
+  end
+
+  private
+  def session_hash
+    {
+      'items' => [
+        { 'product_id' => 1, 'quantity' => 3 },
+        { 'product_id' => 2, 'quantity' => 4 }
+      ]
+    }
   end
 end
